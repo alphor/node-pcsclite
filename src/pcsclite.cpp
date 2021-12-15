@@ -123,6 +123,11 @@ NAN_METHOD(PCSCLite::Close) {
         obj->m_status_thread = 0;
     }
 
+    if (obj->m_card_context) {
+        SCardReleaseContext(obj->m_card_context);
+        obj->m_card_context = 0;
+    }
+
     info.GetReturnValue().Set(Nan::New<Number>(result));
 }
 
